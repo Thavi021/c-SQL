@@ -1,0 +1,19 @@
+namespace Version
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var cs = @"Server=localhost\SQLEXPRESS;Database=testdb;Trusted_Connection=True;";
+            var stm = "SELECT @@VERSION";
+
+            using var con = new SqlConnection(cs);
+            con.Open();
+
+            using var cmd = new SqlCommand(stm, con);
+            string version = cmd.ExecuteScalar().ToString();
+
+            Console.WriteLine(version);
+        }
+    }
+}
